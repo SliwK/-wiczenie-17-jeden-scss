@@ -1,6 +1,11 @@
 $head_foot_color: #313332;
 $hover_color: #02C7E5;
 
+@mixin justify-content($position) {
+    -webkit-box-pack: $position;
+       -ms-flex-pack: $position;
+     justify-content: $position;
+}
 
 /* GRID */
 .row {
@@ -20,34 +25,17 @@ $hover_color: #02C7E5;
 	width: 100%;
 }
 
-.col-1 {width: 8.33%;}
-.col-2 {width: 16.66%;}
-.col-3 {width: 25%;}
-.col-4 {width: 33.33%;}
-.col-5 {width: 41.66%;}
-.col-6 {width: 50%;}
-.col-7 {width: 58.33%;}
-.col-8 {width: 66.66%;}
-.col-9 {width: 75%;}
-.col-10 {width: 83.33%;}
-.col-11 {width: 91.66%;}
-.col-12 {width: 100%;}
-
-.col-offset-1 {margin-left: 8.33%;}
-.col-offset-2 {margin-left: 16.66%;}
-.col-offset-3 {margin-left: 25%;}
-.col-offset-4 {margin-left: 33.33%;}
-.col-offset-5 {margin-left: 41.66%;}
-.col-offset-6 {margin-left: 50%;}
-.col-offset-7 {margin-left: 58.33%;}
-.col-offset-8 {margin-left: 66.66%;}
-.col-offset-9 {margin-left: 75%;}
-.col-offset-10 {margin-left: 83.33%;}
-.col-offset-11 {margin-left: 91.66%;}
+@for $column-number from 1 through 12 {
+  .col-#{$column-number} { width: 100%/12 * $column-number; }
+}
+@for $column-number from 1 through 12 {
+  .col-offset-#{$column-number} {width: 100%/12*$column-number; }
+}
 
 
 * {
-	box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 
 body {
@@ -64,7 +52,15 @@ header {
 				margin: 0 auto;
 				max-width: 1200px;
 				width: 100%;
-				ul {
+        img {
+						float: left;
+						margin: 0 auto;
+						padding: 10px 0;
+				}
+    }
+}
+
+.nav-links {
 						float: right;
 						list-style-type: none;
 						margin: 0;
@@ -73,32 +69,27 @@ header {
 								display: block;
 								float: right;
 								margin: 0.1px;
-								&>a {
-									color: #ffffff;
-									display: block;
-									line-height: 50px;
-									padding: 0 20px;
-									text-decoration: none;
-									text-transform: uppercase;
-									&:hover {
-										color: $hover_color;
-									}
-								}
-						}
-				}
-				&>ul:before,
-				&>ul:after {
-						clear: both;
-					  content: "";
-					  display: table;
-				}
-				img {
-						float: left;
-						margin: 0 auto;
-						padding: 10px 0;
-				}
-		}
+            }
+            &:before,
+    				&:after {
+    						clear: both;
+    					  content: "";
+    					  display: table;
+    				}
 }
+
+.nav-link {
+						color: #ffffff;
+						display: block;
+						line-height: 50px;
+						padding: 0 20px;
+						text-decoration: none;
+						text-transform: uppercase;
+						&:hover {
+							color: $hover_color;
+						}
+}
+
 
 .hero {
 	background-image: url(https://images.unsplash.com/photo-1488190211105-8b0e65b80b4e?w=1050);
@@ -112,7 +103,7 @@ header {
 .slogan {
 	background-color: rgba(49, 52, 52, 0.5);
 	float: right;
-	justify-content: center;
+	@include justify-content(center);
 	max-width: 800px;
 	max-height: 50%;
 	margin: 105.6px 0;
@@ -202,38 +193,22 @@ section>.container {
 	width: auto;
 }
 
-.pic-1 {
-	background-image: url(https://images.unsplash.com/photo-1506512534708-3737d46bffe1?w=1050);
-}
+$pic-url:
 
-.pic-2 {
-	background-image: url(https://images.unsplash.com/photo-1501493870936-9c2e41625521?w=1045);
-}
-
-.pic-3 {
-	background-image: url(https://images.unsplash.com/photo-1506440905961-0ab11f2ed5bc?w=1015);
-}
-
-.pic-4 {
-	background-image: url(https://images.unsplash.com/photo-1468956332313-2dcf1542828f?w=1050);
-}
-
-.pic-5 {
-	background-image: url(https://images.unsplash.com/photo-1501619090-18cfdb466558?w=1189);
-}
-.pic-6 {
-	background-image: url(https://images.unsplash.com/photo-1501619090-18cfdb466558?w=1189);
-}
-.pic-7 {
-	background-image: url(https://images.unsplash.com/photo-1469692422776-14abcfa4b525?w=1050);
-}
-
-.pic-8 {
-	background-image: url(https://images.unsplash.com/photo-1506512534708-3737d46bffe1?w=1050);
-}
-
-.pic-9 {
-	background-image: url(https://images.unsplash.com/photo-1501493870936-9c2e41625521?w=1045);
+(1, "https://images.unsplash.com/photo-1506512534708-3737d46bffe1?w=1050")
+(2, "https://images.unsplash.com/photo-1501493870936-9c2e41625521?w=1045")
+(3, "https://images.unsplash.com/photo-1506440905961-0ab11f2ed5bc?w=1015")
+(4, "https://images.unsplash.com/photo-1468956332313-2dcf1542828f?w=1050")
+(5, "https://images.unsplash.com/photo-1501619090-18cfdb466558?w=1189")
+(6, "https://images.unsplash.com/photo-1501619090-18cfdb466558?w=1189")
+(7, "https://images.unsplash.com/photo-1469692422776-14abcfa4b525?w=1050")
+(8, "https://images.unsplash.com/photo-1506512534708-3737d46bffe1?w=1050")
+(9, "https://images.unsplash.com/photo-1501493870936-9c2e41625521?w=1045")
+;
+@each $pic in $pic-url {
+  .pic-#{nth($pic, 1)} {
+    background-image: url(nth($pic, 2));
+  }
 }
 
 .layer {
@@ -327,21 +302,15 @@ section>.container {
 	}
 
 
-.person-1 {
-	background-image: url(https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=1050&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D);
-}
-
-.person-2 {
-	background-image: url(https://images.unsplash.com/photo-1495147334217-fcb3445babd5?w=1051&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D	);
-}
-
-.person-3 {
-	background-image: url(https://images.unsplash.com/photo-1474176857210-7287d38d27c6?w=1050&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D);
-}
-
-.person-4 {
-	background-image: url(https://images.unsplash.com/photo-1498529605908-f357a9af7bf5?w=1050&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D);
-}
+  $picture-url: (1, "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=1050&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D")
+                (2, "https://images.unsplash.com/photo-1495147334217-fcb3445babd5?w=1051&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D")
+                (3, "https://images.unsplash.com/photo-1474176857210-7287d38d27c6?w=1050&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D")
+                (4, "https://images.unsplash.com/photo-1498529605908-f357a9af7bf5?w=1050&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D");
+  @each $picture in $picture-url {
+    .person-#{nth($picture, 1)} {
+      background-image: url(nth($picture, 2));
+    }
+  }
 
 /*Section: with picture */
 
@@ -369,18 +338,18 @@ section>.container {
 		div {
 			margin: 0 auto;
 			text-align: left;
-			img {
-				border-top-left-radius: 15px;
-				border-top-right-radius: 15px;
-				height: auto;
-				margin-top: 20px;
-				max-width: 300px;
-				width:100%;
+
 			}
 		}
+    .the-picture {
+      border-top-left-radius: 15px;
+      border-top-right-radius: 15px;
+      height: auto;
+      margin-top: 20px;
+      max-width: 300px;
+      width:100%;
 	}
 }
-
 
 /*Section  : Numbers */
 
@@ -480,18 +449,10 @@ footer {
 
 @media (min-width: 768px) {
     /* For desktop: */
-    .col-m-1 {width: 8.33%;}
-    .col-m-2 {width: 16.66%;}
-    .col-m-3 {width: 25%;}
-    .col-m-4 {width: 33.33%;}
-    .col-m-5 {width: 41.66%;}
-    .col-m-6 {width: 50%;}
-    .col-m-7 {width: 58.33%;}
-    .col-m-8 {width: 66.66%;}
-    .col-m-9 {width: 75%;}
-    .col-m-10 {width: 83.33%;}
-    .col-m-11 {width: 91.66%;}
-    .col-m-12 {width: 100%;}
+    @for $column-number from 1 through 12 {
+      .col-m-#{$column-number} { width: 100%/12 * $column-number; }
+    }
+
 }
 
 @media (max-width: 767px)  {
@@ -505,17 +466,17 @@ footer {
             	    float: none;
             	    text-align: center;
           	  }
-              ul {
-          	    float: none;
-          	    text-align: center;
-          	    width: 100%;
-                li {
-            	    float: none;
-            	    text-align: center;
-            	    width: 100%;
-            	  }
-              }
-  	      }
+          }
+    }
+    .nav-links {
+      float: none;
+      text-align: center;
+      width: 100%;
+      li {
+  	    float: none;
+  	    text-align: center;
+  	    width: 100%;
+  	  }
     }
 
     .slogan {
@@ -530,18 +491,11 @@ footer {
     [class*="col-"] {
     	padding: 5px;
     }
-    .col-s-1 {width: 8.33%;}
-    .col-s-2 {width: 16.66%;}
-    .col-s-3 {width: 25%;}
-    .col-s-4 {width: 33.33%;}
-    .col-s-5 {width: 41.66%;}
-    .col-s-6 {width: 50%;}
-    .col-s-7 {width: 58.33%;}
-    .col-s-8 {width: 66.66%;}
-    .col-s-9 {width: 75%;}
-    .col-s-10 {width: 83.33%;}
-    .col-s-11 {width: 91.66%;}
-    .col-s-12 {width: 100%;}
+
+    @for $column-number from 1 through 12 {
+      .col-s-#{$column-number} { width: 100%/12 * $column-number; }
+    }
+
 
     .three-icons [class^="col-"] {
     	float: none;
